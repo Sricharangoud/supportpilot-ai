@@ -12,3 +12,4 @@ International orders may be subject to import duties, VAT, or customs fees levie
 
 ## Restricted Items
 Lithium-ion battery packs over 100Wh and pressurized aerosols cannot be shipped internationally due to air freight regulations.
+

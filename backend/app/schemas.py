@@ -89,3 +89,4 @@ class HealthOut(BaseModel):
     indexed_chunks: int
     llm_provider: str
     llm_configured: bool
+

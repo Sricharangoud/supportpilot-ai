@@ -12,3 +12,4 @@ The warranty does not cover:
 
 ## Filing a Warranty Claim
 To file a warranty claim, provide your order number, serial number, and a brief description or video of the defect. Approved claims are resolved via free repair, replacement, or Northstar store credit if the item is out of stock.
+

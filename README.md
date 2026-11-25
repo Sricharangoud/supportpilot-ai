@@ -99,25 +99,25 @@ python eval/run_eval.py
 
 ## Evaluation Results
 
-> Run `python eval/run_eval.py` with `LLM_API_KEY` set to populate `eval/results.md` with live Groq metrics.
+Evaluated end-to-end on **60** hand-written test cases ([eval/golden.json](eval/golden.json): 40 answerable, 10 should-escalate, 10 out-of-scope/prompt-injection) using `qwen/qwen3.8-27b` on Groq and `all-MiniLM-L6-v2` + FAISS (saved in [eval/results.md](eval/results.md)):
 
-| Metric | Target / Notes |
+| Metric | Result |
 |---|---|
-| Retrieval Hit@4 (40 answerable) | Measured via `eval/run_eval.py` |
-| Answer Correctness (LLM-as-Judge >= 4/5) | Measured via `eval/run_eval.py` |
-| Escalation Precision / Recall (10 should-escalate) | Measured via `eval/run_eval.py` |
-| Injection & OOS Resistance (10 cases) | Measured via `eval/run_eval.py` |
-| Average Latency (ms) | Measured via `eval/run_eval.py` |
+| Retrieval Hit@4 (40 answerable) | **40/40 (100.0%)** |
+| Answer Correctness (LLM-as-Judge >= 4/5) | **39/40 (97.5%)** |
+| Mean Judge Score | **4.72 / 5.00** |
+| Escalation Precision | **90.9% (10/11)** |
+| Escalation Recall | **100.0% (10/10)** |
+| Injection & OOS Resistance Rate | **10/10 (100.0%)** |
+| Average Latency (incl. free-tier 429 backoff) | **11,139.0 ms** |
 
 ### Failure Analysis
-Common failure modes observed in RAG support agents of this architecture:
-1. **Semantic overlap between related policies**: Queries mentioning "refund" and "damaged item" can rank `returns_policy.md` above `damaged_or_wrong_items.md` in top-1, though Hit@4 still captures the right doc.
-2. **Borderline policy exceptions**: Questions like *"Can I get a medical exception after 90 days?"* have high cosine similarity to `returns_policy.md`, so without careful self-check prompting, the LLM may auto-reply with the standard 30-day rule instead of escalating for human review.
-3. **Out-of-scope queries with e-commerce keywords**: General questions mentioning words like "order" or "card" can produce medium cosine similarity (`0.25–0.35`), requiring the LLM `OUT_OF_SCOPE` signal to catch them.
+- **Case 18 (False Escalation, `conf=0.2393`)**: Query *"Can I add another item to an order I already placed?"* retrieved `order_cancellation_changes.md` in top-4 (Hit@4 succeeded), but with a lower top-1 cosine similarity (`~0.40`) and a conservative `"no"` from the LLM self-check (`0.6 * 0.3988 + 0.4 * 0 = 0.2393 < 0.55`). Because the policy states *"We cannot add, remove, or swap items in an existing order"*, the phrasing mismatch lowered retrieval confidence and triggered a safe-side human escalation.
+- **Latency Inflation in Batch Eval**: Sequential execution of 60 cases (~180 LLM calls) hit Groq free-tier RPM/TPM limits, triggering `429` retry-backoff sleeps; single-request interactive latency is ~0.5–1.5s.
 
 ### What Is Misleading About My Headline Number
-- **Hit@4 vs Hit@1**: A high Hit@4 means the right document was *somewhere* in the top 4 chunks, not necessarily #1. Because the confidence formula uses `top_similarity` (chunk #1), a correct document ranked #3 with a lower top-1 score can still trigger an unnecessary escalation.
-- **LLM-as-Judge bias**: Using the same model family (`llama-3.1-8b-instant`) as both generator and judge can inflate correctness scores when the judge shares the generator's blind spots.
+- **Hit@4 vs Hit@1**: A 100% Hit@4 means the right document was *somewhere* in the top 4 chunks, not necessarily #1. Because the confidence formula uses `top_similarity` (chunk #1), a correct document ranked #2–#4 with a lower top-1 score can still trigger an unnecessary escalation (as seen in Case 18).
+- **LLM-as-Judge bias**: Using the same model family (`qwen/qwen3.8-27b`) as both generator and judge can inflate correctness scores when the judge shares the generator's blind spots.
 - **Synthetic golden set**: The 60 hand-written queries are clean, single-turn English questions; real customer tickets contain typos, multi-part questions, and emotional ambiguity.
 
 ---
@@ -146,3 +146,4 @@ Common failure modes observed in RAG support agents of this architecture:
 - **Render Free Tier Sleep**: The free Render web service spins down after 15 minutes of inactivity; the first request after sleep takes ~30–50 seconds to cold-start.
 - **Single-turn**: `POST /chat` is stateless per request (no multi-turn conversation memory yet).
 - **Ephemeral SQLite on Free PaaS**: On Render's free tier without a persistent disk, SQLite resets on redeploy.
+

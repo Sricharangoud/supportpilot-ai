@@ -45,3 +45,4 @@ def init_db(database_url: str):
     engine = create_db_engine(database_url)
     Base.metadata.create_all(bind=engine)
     return sessionmaker(autocommit=False, autoflush=False, bind=engine)
+

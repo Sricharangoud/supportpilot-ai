@@ -289,3 +289,4 @@ class SupportPilotAgent:
             ticket_id=None,
             latency_ms=round(latency_ms, 2),
         )
+

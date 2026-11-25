@@ -1,5 +1,6 @@
 """Provider-agnostic LLM interface with Groq, OpenAI, and Gemini adapters."""
 from abc import ABC, abstractmethod
+import time
 import httpx
 
 from app.config import Settings
@@ -47,10 +48,15 @@ class OpenAICompatibleProvider(LLMProvider):
             "max_tokens": max_tokens,
         }
         with httpx.Client(timeout=self.timeout) as client:
-            resp = client.post(f"{self.base_url}/chat/completions", headers=headers, json=payload)
-            resp.raise_for_status()
-            data = resp.json()
-            return data["choices"][0]["message"]["content"].strip()
+            for attempt in range(4):
+                resp = client.post(f"{self.base_url}/chat/completions", headers=headers, json=payload)
+                if resp.status_code == 429 and attempt < 3:
+                    retry_after = float(resp.headers.get("retry-after", 2 * (attempt + 1)))
+                    time.sleep(min(retry_after, 15.0))
+                    continue
+                resp.raise_for_status()
+                data = resp.json()
+                return data["choices"][0]["message"]["content"].strip()
 
 
 def get_llm_provider(settings: Settings) -> LLMProvider:
@@ -75,3 +81,4 @@ def get_llm_provider(settings: Settings) -> LLMProvider:
             base_url="https://generativelanguage.googleapis.com/v1beta/openai",
         )
     raise ValueError(f"Unsupported LLM_PROVIDER: {settings.llm_provider}")
+

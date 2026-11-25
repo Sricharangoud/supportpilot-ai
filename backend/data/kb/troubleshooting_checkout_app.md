@@ -11,3 +11,4 @@ If your bank's One-Time Passcode (OTP) window fails to load, try switching from 
 
 ## Mobile App Crashes
 Update the Northstar Shop app to the latest version in the Apple App Store or Google Play Store. If crashes persist on iOS or Android, reinstall the app and sign back in.
+

@@ -10,3 +10,4 @@ When an inquiry is escalated to a human specialist:
 - **Standard Support Tickets:** Response within 24 business hours.
 - **Urgent / Damaged Order Tickets:** Response within 4 business hours during operating hours.
 - **Peak Tier Loyalty Members:** Priority queue with 2-hour response SLA.
+

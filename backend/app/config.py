@@ -2,10 +2,8 @@
 from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# Resolve project root whether running from repo root or backend/
 _THIS_DIR = Path(__file__).resolve().parent
 _BACKEND_DIR = _THIS_DIR.parent
-_PROJECT_ROOT = _BACKEND_DIR.parent
 
 
 class Settings(BaseSettings):
@@ -13,11 +11,11 @@ class Settings(BaseSettings):
 
     llm_api_key: str = ""
     llm_provider: str = "groq"
-    llm_model: str = "llama-3.1-8b-instant"
+    llm_model: str = "qwen/qwen3.8-27b"
 
     embedding_model: str = "all-MiniLM-L6-v2"
-    faiss_index_path: str = str(_PROJECT_ROOT / "data" / "faiss_index")
-    kb_dir: str = str(_PROJECT_ROOT / "data" / "kb")
+    faiss_index_path: str = str(_BACKEND_DIR / "data" / "faiss_index")
+    kb_dir: str = str(_BACKEND_DIR / "data" / "kb")
 
     confidence_threshold: float = 0.55
     top_k: int = 4

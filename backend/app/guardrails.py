@@ -42,3 +42,4 @@ def is_sensitive_message(text: str) -> tuple[bool, str]:
         if pattern.search(text):
             return True, category
     return False, ""
+

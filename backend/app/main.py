@@ -153,3 +153,4 @@ def get_metrics(db: Session = Depends(get_db)):
         escalation_rate=round(escalated / total, 4),
         avg_latency_ms=round(avg_latency, 2),
     )
+

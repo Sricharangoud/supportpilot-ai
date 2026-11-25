@@ -152,3 +152,4 @@ def test_agent_refuses_prompt_injection(tmp_path):
     assert resp.decision == "refuse"
     assert len(llm.calls) == 0  # Blocked before calling LLM
     assert db.query(ConversationLog).count() == 1
+

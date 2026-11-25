@@ -11,3 +11,4 @@ If your tracking shows "Delivered" but you cannot locate the package:
 1. Wait 24 hours, as carriers occasionally scan packages early.
 2. Check around porches, garages, mailrooms, and with neighbors.
 3. If still missing after 24 hours, contact Northstar Shop within 7 days of the delivery scan so we can open a carrier trace and arrange a replacement or refund.
+

@@ -11,3 +11,4 @@ In **My Account > Subscriptions**, you can:
 
 ## Cutoff Window
 Changes or cancellations must be made at least **48 hours before** your scheduled renewal date. Once a renewal order has been billed and processed, standard return policies apply.
+

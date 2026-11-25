@@ -3,6 +3,7 @@ services:
     name: supportpilot-ai-backend
     runtime: docker
     plan: free
+    rootDir: backend
     dockerfilePath: ./Dockerfile
     healthCheckPath: /health
     envVars:
@@ -13,6 +14,6 @@ services:
       - key: LLM_PROVIDER
         value: groq
       - key: LLM_MODEL
-        value: llama-3.1-8b-instant
+        value: qwen/qwen3.8-27b
       - key: CONFIDENCE_THRESHOLD
         value: "0.55"

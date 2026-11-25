@@ -12,3 +12,4 @@ Price adjustments do not apply to:
 
 ## How to Request
 Contact support with your order number and a link to the current product page showing the lower price.
+

@@ -64,3 +64,4 @@ def test_escalation_rule_triggers_on_sensitive_even_if_high_confidence():
 
 def test_escalation_rule_auto_replies_when_confident_and_safe():
     assert should_escalate(confidence=0.75, threshold=0.55, is_sensitive=False) is False
+

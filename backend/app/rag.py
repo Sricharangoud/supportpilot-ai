@@ -150,3 +150,4 @@ class VectorStore:
                 continue
             results.append(RetrievedChunk(chunk=self.chunks[idx], score=float(score)))
         return results
+

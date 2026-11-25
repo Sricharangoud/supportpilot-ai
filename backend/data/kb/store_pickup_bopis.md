@@ -9,3 +9,4 @@ Select **Free Store Pickup** at checkout for eligible in-stock items at particip
 
 ## What to Bring
 Bring a valid government-issued photo ID and your order confirmation email. If someone else is picking up your order, add them as an alternate pickup person during checkout.
+

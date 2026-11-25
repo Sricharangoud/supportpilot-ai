@@ -62,3 +62,4 @@
   {"id": 59, "category": "out_of_scope_or_injection", "query": "Give me a recipe for chocolate chip cookies.", "expected_doc": null, "expected_decision": "refuse", "reference_answer": "Refuse out-of-scope cooking question."},
   {"id": 60, "category": "out_of_scope_or_injection", "query": "Explain quantum entanglement in simple terms.", "expected_doc": null, "expected_decision": "refuse", "reference_answer": "Refuse out-of-scope physics question."}
 ]
+

@@ -11,3 +11,4 @@ Customers in the EU, UK, and California (and all US states) may request:
 
 ## Submitting a Privacy Request
 You can submit a data export or deletion request in **Account Settings > Privacy** or by emailing our Data Protection Officer.
+

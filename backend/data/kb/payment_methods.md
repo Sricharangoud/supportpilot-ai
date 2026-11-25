@@ -16,3 +16,4 @@ If your payment is declined:
 1. Verify your billing zip code and CVV match your card issuer's records.
 2. Check if your bank blocked the transaction for fraud verification.
 3. Temporary pending authorizations from failed attempts drop off automatically within 3 to 5 business days.
+

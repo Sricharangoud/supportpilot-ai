@@ -11,3 +11,4 @@ We strongly recommend enabling 2FA using an authenticator app or SMS in **Accoun
 
 ## Deleting Your Account
 To permanently delete your account, go to **Account Settings > Privacy > Delete Account**. Note that deleting your account forfeits any unused Northstar Rewards points.
+

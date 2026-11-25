@@ -17,3 +17,4 @@ The following items are final sale and cannot be returned:
 
 ## How to Start a Return
 Log in to your Northstar Shop account, go to **Orders**, select the order, and click **Request Return**. You will receive a prepaid printable QR code or shipping label via email within 15 minutes.
+

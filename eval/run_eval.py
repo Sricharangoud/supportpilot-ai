@@ -184,3 +184,4 @@ if __name__ == "__main__":
     parser.add_argument("--retrieval-only", action="store_true")
     args = parser.parse_args()
     run_eval(retrieval_only=args.retrieval_only)
+

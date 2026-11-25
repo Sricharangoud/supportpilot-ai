@@ -37,3 +37,4 @@ def test_chunk_text_rejects_invalid_overlap():
         assert False, "Expected ValueError when overlap >= chunk_size"
     except ValueError:
         pass
+

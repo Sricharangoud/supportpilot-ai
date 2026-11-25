@@ -57,3 +57,4 @@ def test_sensitive_message_detection():
     assert is_sensitive_message("Unauthorized fraud charge on my credit card!")[0] is True
     assert is_sensitive_message("I want to file a formal BBB complaint.")[0] is True
     assert is_sensitive_message("What is the standard shipping cost?")[0] is False
+

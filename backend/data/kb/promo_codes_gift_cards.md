@@ -9,3 +9,4 @@
 - Digital and physical gift cards never expire and carry zero maintenance fees.
 - You can check your gift card balance under **My Account > Gift Cards** or by entering the 16-digit card number at checkout.
 - Gift cards are non-refundable and cannot be redeemed for cash unless required by state law.
+

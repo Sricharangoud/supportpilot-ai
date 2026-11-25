@@ -10,3 +10,4 @@ Joining Northstar Rewards is free. Members earn **1 point per $1 spent** on elig
 
 ## Redeeming Points
 Points can be redeemed at checkout in increments of 100 points ($5 reward). Points expire after 12 months of account inactivity.
+

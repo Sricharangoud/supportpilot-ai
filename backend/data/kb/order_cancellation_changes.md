@@ -8,3 +8,4 @@ Shipping addresses can only be updated within 1 hour of purchase and before a sh
 
 ## Modifying Items or Quantities
 We cannot add, remove, or swap items in an existing order. If you are within the 1-hour window, cancel the order and place a new one. Otherwise, wait for delivery and initiate a standard return.
+
