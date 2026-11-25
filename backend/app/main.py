@@ -47,6 +47,8 @@ async def lifespan(app: FastAPI):
             chunk_size=settings.chunk_size,
             overlap=settings.chunk_overlap,
         )
+    # Pre-warm lightweight ONNX embedder so the first /chat request is instant
+    _ = vector_store.embedder
     yield
 
 

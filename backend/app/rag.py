@@ -47,6 +47,33 @@ def chunk_text(
     return chunks
 
 
+class _FastEmbedAdapter:
+    """Lightweight ONNX embedder adapter matching sentence-transformers encode() signature."""
+
+    def __init__(self, model_name: str):
+        from fastembed import TextEmbedding
+
+        resolved = (
+            "sentence-transformers/all-MiniLM-L6-v2"
+            if model_name == "all-MiniLM-L6-v2"
+            else model_name
+        )
+        self._model = TextEmbedding(model_name=resolved)
+
+    def encode(
+        self,
+        texts: list[str],
+        normalize_embeddings: bool = True,
+        show_progress_bar: bool = False,
+    ) -> np.ndarray:
+        vecs = np.asarray(list(self._model.embed(texts)), dtype="float32")
+        if normalize_embeddings and len(vecs) > 0:
+            norms = np.linalg.norm(vecs, axis=1, keepdims=True)
+            norms = np.where(norms == 0, 1.0, norms)
+            vecs = vecs / norms
+        return vecs
+
+
 class VectorStore:
     """FAISS IndexFlatIP vector store persisted to disk alongside chunk metadata."""
 
@@ -65,9 +92,7 @@ class VectorStore:
     @property
     def embedder(self):
         if self._embedder is None:
-            from sentence_transformers import SentenceTransformer
-
-            self._embedder = SentenceTransformer(self.embedding_model_name)
+            self._embedder = _FastEmbedAdapter(self.embedding_model_name)
         return self._embedder
 
     @property
