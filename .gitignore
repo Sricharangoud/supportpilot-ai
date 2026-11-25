@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+
+# Database & Vector Store (generated at runtime/build)
+*.db
+*.sqlite
+*.sqlite3
+data/faiss_index/
+backend/data/faiss_index/
+backend/supportpilot.db
+supportpilot.db
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
